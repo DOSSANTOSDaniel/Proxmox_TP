@@ -1,14 +1,11 @@
 #!/bin/bash
 
-rm -rf /etc/apt/sources.list.d/pve-enterprise.list
-echo "" >> /etc/apt/sources.list
+rm /etc/apt/sources.list.d/pve-enterprise.list
 echo "# Proxmox Test" >> /etc/apt/sources.list
 echo "deb http://download.proxmox.com/debian/pve buster pvetest" >> /etc/apt/sources.list
-echo "" >> /etc/apt/sources.list
 sleep 1
 apt update && apt full-upgrade -y
-sleep 2
-
+sleep 1
 # Installation et configuration de fail2ban
 apt install fail2ban -y
 sleep 2
@@ -17,7 +14,7 @@ echo "
 
 [DEFAULT]
 destemail = danielitto91@gmail.com
-sender = root@exemple.lan
+sender = root@example.lan
 ignoreip = 127.0.0.1/8 192.168.56.105 192.168.56.106 192.168.56.107
 
 [sshd]
@@ -35,10 +32,8 @@ enabled = true
 enabled = true
 " > /etc/fail2ban/jail.d/defaults-debian.conf
 sleep 2
-#systemctl restart fail2ban
-sleep 3
-#fail2ban-client status
-sleep 3
+systemctl restart fail2ban
+
 # Installation de Molly-guard
 apt install molly-guard -y
 
@@ -59,9 +54,8 @@ apt install at -y
 sleep 2
 
 # Purge de l'ancien Kernel
-
 apt purge pve-kernel-5.0.15-1-pve -y | at now + 6 minutes
-sleep 3
+sleep 2
 
 # redémarrage
 reboot
