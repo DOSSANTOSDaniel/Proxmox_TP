@@ -1,5 +1,4 @@
 #!/bin/bash
-
 rm /etc/apt/sources.list.d/pve-enterprise.list
 echo "# Proxmox Test" >> /etc/apt/sources.list
 echo "deb http://download.proxmox.com/debian/pve buster pvetest" >> /etc/apt/sources.list
