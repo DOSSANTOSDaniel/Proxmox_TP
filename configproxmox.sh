@@ -4,7 +4,6 @@ echo "# Proxmox Test" >> /etc/apt/sources.list
 echo "deb http://download.proxmox.com/debian/pve buster pvetest" >> /etc/apt/sources.list
 sleep 1
 apt update && apt full-upgrade -y
-sleep 1
 
 #  Enlever la bannière de subscription
 cp /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js.save
@@ -37,7 +36,7 @@ enabled = true
 [recidive]
 enabled = true
 " > /etc/fail2ban/jail.d/defaults-debian.conf
-sleep 2
+sleep 1
 systemctl restart fail2ban
 
 # Installation de Molly-guard
