@@ -3,8 +3,6 @@
 * Mise à jour
 * Enlever la bannière de subscription
 * Installation et configuration de fail2ban
-* Installation et configuration de 
-* Installation et configuration de 
 * Installation de Molly-guard
 * Installation de rkhunter
 * Installation de Mlocate
