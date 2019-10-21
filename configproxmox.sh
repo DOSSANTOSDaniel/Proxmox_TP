@@ -5,6 +5,13 @@ echo "deb http://download.proxmox.com/debian/pve buster pvetest" >> /etc/apt/sou
 sleep 1
 apt update && apt full-upgrade -y
 sleep 1
+
+#  Enlever la bannière de subscription
+cp /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js.save
+sed -i "s/data.status !== 'Active'/false/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
+sleep 1
+systemctl restart pveproxy.service
+
 # Installation et configuration de fail2ban
 apt install fail2ban -y
 sleep 2
