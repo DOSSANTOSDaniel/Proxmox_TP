@@ -1,5 +1,5 @@
 # Proxmox_TP
-* Modification des souces
+* Modification des sources
 * Mise à jour
 * Enlever la bannière de subscription
 * Installation et configuration de fail2ban
