@@ -7,8 +7,16 @@ usertos=$(w | awk '{print $1}' | awk 'NR==3')
 
 apt update && apt dist-upgrade -y
 
+#Make sure network-manager is not used, else pve-cluster will not start in some cases
+apt remove network-manager --purge
+
 # Installation de Gnome3
-apt install task-gnome-desktop -y
+#apt install task-gnome-desktop -y
+
+# Install mate
+apt-get install xorg -y
+apt-get install lightdm -y
+apt-get install mate-desktop-environment -y
 
 # optimisation pour laptop
 tasksel install laptop
@@ -57,16 +65,21 @@ ufw status
 apt install firmware-linux firmware-linux-nonfree libdrm-amdgpu1 xserver-xorg-video-amdgpu -y
 
 # appstore synaptic
-apt install synaptic apt-xapian-index
+apt install synaptic apt-xapian-index -y
 
 # Pilote ATI
-apt install libgl1-mesa-dri xserver-xorg-video-ati
+apt install libgl1-mesa-dri xserver-xorg-video-ati -y
+
+# install the headers and nvidia-drivers
+apt install pve-headers -y
+apt-get update 
+apt-get install nvidia-driver -y
 
 # Pilote Radeon
-apt install libgl1-mesa-dri xserver-xorg-video-radeon
+apt install libgl1-mesa-dri xserver-xorg-video-radeon -y
 
 # installateur .deb
-apt update && apt install gdebi
+apt install gdebi -y
 
 #  Enlever la bannière de subscription
 cp /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js.save
@@ -117,12 +130,15 @@ apt install net-tools -y
 apt install at -y
 sleep 2
 
-# mise à jour grub
+#Optional: Remove the Debian kernel
+#apt-get remove linux-image-amd64 linux-image-3.16.0-4-amd64 linux-base
 
+# mise à jour grub
+update-grub
 
 # nettoyage du système
 apt-get autoremove --purge
-apt-get clean
+apt-get autoclean --purge
 rm -Rf ~/.local/share/Trash/*
 rm -Rf /root/.local/share/Trash/*
 rm -Rf ~/.thumbnails
