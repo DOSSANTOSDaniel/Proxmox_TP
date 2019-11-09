@@ -85,7 +85,7 @@ echo "
 [DEFAULT]
 destemail = danielitto91@gmail.com
 sender = root@example.lan
-ignoreip = 127.0.0.1/8 192.168.56.105 192.168.56.106 192.168.56.107
+ignoreip = 127.0.0.1/8 $ipnet $ipwifi
 [sshd]
 enabled = true
 port = 22
