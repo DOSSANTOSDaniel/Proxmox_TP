@@ -82,4 +82,4 @@ apt install proxmox-ve postfix open-iscsi -y
 
 rm /etc/apt/sources.list.d/pve-enterprise.list
 
-reboot
+systemctl reboot
