@@ -132,4 +132,4 @@ apt purge pve-kernel-5.0.15-1-pve -y | at now + 6 minutes
 sleep 2
 
 # redémarrage
-reboot
+systemctl reboot
