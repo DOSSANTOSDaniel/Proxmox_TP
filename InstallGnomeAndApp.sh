@@ -144,6 +144,7 @@ rm -Rf /root/.local/share/Trash/*
 rm -Rf ~/.thumbnails
 
 # Purge de l'ancien Kernel
+#apt remove linux-image-amd64 linux-image-4.9.0-3-amd64
 apt purge pve-kernel-5.0.15-1-pve -y | at now + 6 minutes
 sleep 2
 
