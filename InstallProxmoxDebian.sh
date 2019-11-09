@@ -78,7 +78,7 @@ sleep 1
 
 apt update && apt dist-upgrade -y
 
-apt install proxmox-ve postfix open-iscsi -y
+apt install proxmox-ve postfix open-iscsi ksm-control-daemon systemd-sysv -y
 
 rm /etc/apt/sources.list.d/pve-enterprise.list
 
