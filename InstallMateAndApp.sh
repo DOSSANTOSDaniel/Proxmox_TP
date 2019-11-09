@@ -132,6 +132,8 @@ sleep 2
 #apt-get remove linux-image-amd64 linux-image-3.16.0-4-amd64 linux-base
 
 # mise à jour grub
+# Le fichier /etc/default/grub contient l'option GRUB_DISABLE_OS_PROBER="true" donc windows no detecter par grub !!!
+sed -i -e 's/GRUB_DISABLE_OS_PROBER="true"/GRUB_DISABLE_OS_PROBER="false"/' /etc/default/grub
 update-grub
 
 # nettoyage du système
@@ -139,9 +141,13 @@ apt-get autoremove --purge
 apt-get autoclean --purge
 apt clean
 
-# Purge de l'ancien Kernel
-#apt remove linux-image-amd64 linux-image-4.9.0-3-amd64
-#apt purge pve-kernel-5.0.15-1-pve -y | at now + 6 minutes
+# Purge des anciens Kernels
+nbkern=$(dpkg --list | grep linux-image | wc -l)
+for (( i=1; i<=$nbkern; i++ ))
+do
+  onekern=$(dpkg --list | grep linux-image | awk '{print $2}' | awk "NR==$i")
+  apt remove $onekern --purge
+done
 
 # redémarrage
 systemctl reboot
