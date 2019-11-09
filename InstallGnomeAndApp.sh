@@ -3,9 +3,6 @@
 # variables
 ipnet=$(hostname -I | awk '{print $1}')
 ipwifi=$(hostname -I | awk '{print $2}')
-routetos=$(ip route | grep '^default via' | awk '{print $3}')
-interfacewifi=$(ip link | grep ^3 | awk '{print $2}' | sed s'/://')
-interfacenet=$(ip link | grep ^2 | awk '{print $2}' | sed s'/://')
 usertos=$(w | awk '{print $1}' | awk 'NR==3')
 
 apt update && apt dist-upgrade -y
