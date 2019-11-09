@@ -7,13 +7,15 @@
 
 apt update && apt dist-upgrade -y
 
-echo "PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin" >> /home/daniel/.bashrc
-sleep 1
-source /home/daniel/.bashrc
+usertos=$(w | awk '{print $1}' | awk 'NR==3')
 
-echo "PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin" >> /root/.bashrc
-sleep 1 
-source /root/.bashrc
+# pas besoin car il faut sur debian faire "su -" obligatoire si non pas d'accès sbin
+#echo "PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin" >> /home/$usertos/.bashrc
+#sleep 1
+#source /home/daniel/.bashrc
+#echo "PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin" >> /root/.bashrc
+#sleep 1 
+#source /root/.bashrc
 
 hostnamectl set-hostname pve1.proxmox.lan --static
  
@@ -23,19 +25,21 @@ routetos=$(ip route | grep '^default via' | awk '{print $3}')
 interfacewifi=$(ip link | grep ^3 | awk '{print $2}' | awk 'NR==1' | sed s'/://')
 interfacenet=$(ip link | grep ^2 | awk '{print $2}' | awk 'NR==1' | sed s'/://')
 read -p "Quelle type de connexion ? Wifi[w] ou Câble[c] : " typecon
-if [ $tycon=="c" || "C" ]
+if [[ $typecon == [cC] ]]
 then
     sed -i -e "s/iface $interfacenet inet dhcp/iface $interfacenet inet static/" /etc/network/interfaces
     echo "    address $ipnet/24" >> /etc/network/interfaces
     echo "    gateway $routetos" >> /etc/network/interfaces
-elif [ $tycon=="w" || "W" ]
+elif [[ $typecon== [wW] ]]
 then
     echo "script pas compatible en wifi"
     exit 0
     #sed -i -e "s/iface $interfacewifi inet dhcp/iface $interfacewifi inet static/" /etc/network/interfaces
     #echo "    address $ipwifi/24" >> /etc/network/interfaces
     #echo "    gateway $routetos" >> /etc/network/interfaces
-    
+else
+    echo " Erreur syntax redémarrer le script"
+    exit 1
 fi
 
 echo $ipnet"pve1.proxmox.lan pve1" |  tee -a /etc/hosts
