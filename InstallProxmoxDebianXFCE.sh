@@ -25,12 +25,12 @@ routetos=$(ip route | grep '^default via' | awk '{print $3}')
 interfacewifi=$(ip link | grep ^3 | awk '{print $2}' | awk 'NR==1' | sed s'/://')
 interfacenet=$(ip link | grep ^2 | awk '{print $2}' | awk 'NR==1' | sed s'/://')
 read -p "Quelle type de connexion ? Wifi[w] ou Câble[c] : " typecon
-if [[ $typecon == [cC] ]]
+if [ $typecon == "c" ]
 then
     sed -i -e "s/iface $interfacenet inet dhcp/iface $interfacenet inet static/" /etc/network/interfaces
     echo "    address $ipnet/24" >> /etc/network/interfaces
     echo "    gateway $routetos" >> /etc/network/interfaces
-elif [[ $typecon== [wW] ]]
+elif [ $typecon == "w" ]
 then
     echo "script pas compatible en wifi"
     exit 0
