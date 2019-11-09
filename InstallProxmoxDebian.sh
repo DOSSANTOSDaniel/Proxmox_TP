@@ -14,7 +14,9 @@ routetos=$(ip route | grep '^default via' | awk '{print $3}')
 interfacewifi=$(ip link | grep ^3 | awk '{print $2}' | sed s'/://')
 interfacenet=$(ip link | grep ^2 | awk '{print $2}' | sed s'/://')
 
+echo ""
 read -p "Quelle type de connexion ? Wifi[w] ou Câble[c] : " typecon
+echo ""
 
 if [ $typecon == "c" ]
 then
