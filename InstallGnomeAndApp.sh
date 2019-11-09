@@ -1,6 +1,14 @@
 #!/bin/bash
 
+apt update && apt dist-upgrade -y
+
 apt install task-gnome-desktop -y
+
+#tasksel install desktop gnome-desktop
+
+tasksel install laptop
+
+systemctl set-default graphical.target
 
 wget https://github.com/Automattic/simplenote-electron/releases/download/v1.10.0/Simplenote-linux-1.10.0-amd64.deb
 apt install gconf2 -y
@@ -12,3 +20,6 @@ echo "deb https://dl.bintray.com/resin-io/debian stable etcher" | tee /etc/apt/s
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
 apt update
 apt install etcher-electron -y
+
+apt install sudo -y
+usermod -aG sudo 
