@@ -146,7 +146,7 @@ nbkern=$(dpkg --list | grep linux-image | wc -l)
 for (( i=1; i<=$nbkern; i++ ))
 do
   onekern=$(dpkg --list | grep linux-image | awk '{print $2}' | awk "NR==$i")
-  apt remove $onekern --purge
+  apt remove $onekern --purge -y
 done
 
 # redémarrage
