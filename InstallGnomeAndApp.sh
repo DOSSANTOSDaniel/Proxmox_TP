@@ -84,8 +84,6 @@ apt install gdebi -y
 #  Enlever la bannière de subscription
 cp /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js.save
 sed -i "s/data.status !== 'Active'/false/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
-sleep 1
-systemctl restart pveproxy.service
 
 # Installation et configuration de fail2ban
 apt install fail2ban -y
@@ -139,14 +137,11 @@ update-grub
 # nettoyage du système
 apt-get autoremove --purge
 apt-get autoclean --purge
-rm -Rf ~/.local/share/Trash/*
-rm -Rf /root/.local/share/Trash/*
-rm -Rf ~/.thumbnails
+apt clean
 
 # Purge de l'ancien Kernel
 #apt remove linux-image-amd64 linux-image-4.9.0-3-amd64
-apt purge pve-kernel-5.0.15-1-pve -y | at now + 6 minutes
-sleep 2
+#apt purge pve-kernel-5.0.15-1-pve -y | at now + 6 minutes
 
 # redémarrage
 systemctl reboot
