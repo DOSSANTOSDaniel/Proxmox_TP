@@ -103,7 +103,7 @@ apt install proxmox-ve postfix open-iscsi -y
 
 rm /etc/apt/sources.list.d/pve-enterprise.list
 
-apt-get install xfce4 iceweasel lightdm xfce4-terminal gedit
+apt-get install xfce4 iceweasel lightdm xfce4-terminal gedit -y
 sleep 5
 reboot
 
