@@ -19,17 +19,31 @@ usertos=$(w | awk '{print $1}' | awk 'NR==3')
 
 hostnamectl set-hostname pve1.proxmox.lan --static
  
-ipnet=$(hostname -I | awk 'NR==1' | sed s'/.$//')
-ipwifi=$(hostname -I | awk 'NR==2' | sed s'/.$//')
+ipnet=$(hostname -I | awk '{print $1}')
+#ipwifi=$(hostname -I | awk '{print $2}')
 routetos=$(ip route | grep '^default via' | awk '{print $3}')
-interfacewifi=$(ip link | grep ^3 | awk '{print $2}' | awk 'NR==1' | sed s'/://')
-interfacenet=$(ip link | grep ^2 | awk '{print $2}' | awk 'NR==1' | sed s'/://')
+#interfacewifi=$(ip link | grep ^3 | awk '{print $2}' | sed s'/://')
+interfacenet=$(ip link | grep ^2 | awk '{print $2}' | sed s'/://')
 read -p "Quelle type de connexion ? Wifi[w] ou Câble[c] : " typecon
 if [ $typecon == "c" ]
 then
-    sed -i -e "s/iface $interfacenet inet dhcp/iface $interfacenet inet static/" /etc/network/interfaces
-    echo "    address $ipnet/24" >> /etc/network/interfaces
-    echo "    gateway $routetos" >> /etc/network/interfaces
+    echo "
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+allow-hotplug $interfacenet
+iface $interfacenet inet static
+    address $ipnet
+    gateway $routetos
+    dns-nameservers $routetos 8.8.8.8
+" > /etc/network/interfaces
 elif [ $typecon == "w" ]
 then
     echo "script pas compatible en wifi"
@@ -42,7 +56,7 @@ else
     exit 1
 fi
 
-echo $ipnet"pve1.proxmox.lan pve1" |  tee -a /etc/hosts
+echo $ipnet "pve1.proxmox.lan pve1" |  tee -a /etc/hosts
 
 apt install gnupg -y
 
