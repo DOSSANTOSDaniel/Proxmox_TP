@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# Description:
+#	Permet l'installation d'une station de travail sur Proxmox
+#----------------------------------------------------------------#
+# Usage: ./InstallGUIApp.sh
+#	Exécuter le script en root!
+#
+# Campatibilité:
+#	Il est préférable de ne pas être connecté en Wifi
+# Auteur:
+#  	Daniel DOS SANTOS < daniel.massy91@gmail.com >
+#----------------------------------------------------------------#
+
 # variables réseau
 ipnet=$(hostname -I | awk '{print $1}')
 ipwifi=$(hostname -I | awk '{print $2}')
