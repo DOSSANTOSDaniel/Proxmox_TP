@@ -6,6 +6,7 @@
 # Usage: ./InstallGUIApp.sh
 #	Exécuter le script en root!
 # 	Se connecter en root avec cette commande "su -" !
+#	Durée: 24 minutes
 #
 # Campatibilité:
 #	Il est préférable de ne pas être connecté en Wifi.
@@ -49,22 +50,26 @@ case $choix in
     apt install mate-desktop-environment task-french -y
     apt install mate-desktop-environment-extra -y
     apt install mate-desktop-environment-extras -y
+    apt install mate-l10n -y
     break
 		;;
 	2 )
 		# Install Cinnamon
     apt install cinnamon-desktop-environment cinnamon-common -y
     apt install task-cinnamon-desktop task-french -y
+    apt install cinnamon-l10n -y
     break
 		;;
 	3 )
 		# Install LXQT
     apt install task-lxqt-desktop task-french lxqt -y
+    apt install lxqt-l10n -y
     break
 		;;
   4 )
 		# Install XFCE4
     apt install task-xfce-desktop xfce4 task-french -y
+    apt install xfce4-l10n -y
     break
 		;;
 	* )
