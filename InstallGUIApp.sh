@@ -145,16 +145,6 @@ apt install ncdu -y
 
 ### installation de dépendances ou autre
 apt install software-properties-common -y
-# installation de microapplications tierces
-apt install firmware-linux firmware-linux-nonfree libdrm-amdgpu1 xserver-xorg-video-amdgpu -y
-
-# Pilote ATI
-apt install libgl1-mesa-dri xserver-xorg-video-ati -y
-
-# install the headers and nvidia-drivers
-apt install pve-headers -y
-apt update 
-apt install nvidia-driver -y
 
 # Pilote Radeon
 apt install libgl1-mesa-dri xserver-xorg-video-radeon -y
