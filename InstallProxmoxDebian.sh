@@ -6,6 +6,7 @@
 # Usage: ./InstallProxmoxDebian.sh
 #	Exécuter le script en root!
 #   Se connecter en root avec cette commande "su -" !
+#   Durée: 7 minutes
 #
 # Campatibilité:
 #	Il est préférable de ne pas être connecté en Wifi.
