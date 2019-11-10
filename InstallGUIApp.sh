@@ -28,57 +28,9 @@ apt remove network-manager --purge
 
 # Installation d'une interface graphique
 apt install xorg -y
+apt install mesa-utils -y
+apt install mate-desktop-environment-extras -y
 apt install lightdm -y
-
-while [ : ]
-do
-echo -e "\n
-+---------------+
-|  Mate     [1] |
-|  Cinnamon [2] |
-|  LXQT     [3] |
-|  XFCE4    [4] |
-+---------------+  
-"
-read -p "Choix de l'interface graphique : " choix
-echo " "
-
-case $choix in
-	1 )
-		# Install Mate
-    apt install task-mate-desktop -y
-    apt install mate-desktop -y
-    apt install mate-desktop-common -y
-    apt install mate-desktop-environment task-french -y
-    apt install mate-desktop-environment-extra -y
-    apt install mate-desktop-environment-extras -y
-    apt install mate-l10n -y
-    break
-		;;
-	2 )
-		# Install Cinnamon
-    apt install cinnamon-desktop-environment cinnamon-common -y
-    apt install task-cinnamon-desktop task-french -y
-    apt install cinnamon-l10n -y
-    break
-		;;
-	3 )
-		# Install LXQT
-    apt install task-lxqt-desktop task-french lxqt -y
-    apt install lxqt-l10n -y
-    break
-		;;
-  4 )
-		# Install XFCE4
-    apt install task-xfce-desktop xfce4 task-french -y
-    apt install xfce4-l10n -y
-    break
-		;;
-	* )
-		echo "Erreur de saisie !"
-		;;
-esac
-done
 
 # démarrage automatique de l'interface graphique au boot de la machine
 systemctl set-default graphical.target
@@ -100,11 +52,10 @@ ufw enable -y
 ufw status
 
 apt install fail2ban -y
-sleep 1
 echo "
 # ne pas éditer /etc/fail2ban/jail.conf
 [DEFAULT]
-destemail = danielitto91@gmail.com
+destemail = root@gmail.com
 sender = root@example.lan
 ignoreip = 127.0.0.1/8 $ipnet $ipwifi
 [sshd]
@@ -151,13 +102,6 @@ echo "deb http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk-st
 sleep 1
 apt update
 apt install anydesk -y
-
-# Installation de Sublime text
-apt install apt-transport-https -y
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-apt update
-apt install sublime-text -y
 
 # Installation de Wireshark
 apt install wireshark -y
