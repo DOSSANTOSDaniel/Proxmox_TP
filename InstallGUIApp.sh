@@ -221,7 +221,7 @@ sleep 1
 update-grub
 
 # nettoyage du système
-apt autoremove --purge
+apt autoremove --purge -y
 apt autoclean
 
 # Purge des anciens Kernels
