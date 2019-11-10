@@ -5,9 +5,10 @@
 #----------------------------------------------------------------#
 # Usage: ./InstallGUIApp.sh
 #	Exécuter le script en root!
+# 	Se connecter en root avec cette commande "su -" !
 #
 # Campatibilité:
-#	Il est préférable de ne pas être connecté en Wifi
+#	Il est préférable de ne pas être connecté en Wifi.
 # Auteur:
 #  	Daniel DOS SANTOS < daniel.massy91@gmail.com >
 #----------------------------------------------------------------#
