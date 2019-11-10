@@ -149,8 +149,8 @@ apt install anydesk -y
 apt install apt-transport-https -y
 wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
 echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-apt-get update
-apt-get install sublime-text -y
+apt update
+apt install sublime-text -y
 
 # Installation de Wireshark
 apt install wireshark -y
@@ -168,11 +168,12 @@ echo "
 deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
 " > /etc/apt/sources.list.d/google-chrome.list
 apt update && apt upgrade -y
+rm google-chrome-stable_current_amd64.deb
 
 # Installation de LibreOffice
 apt install libreoffice -y
-apt-get install libreoffice-voikko
-apt-get install openclipart-libreoffice
+apt install libreoffice-voikko -y
+apt install openclipart-libreoffice -y
 wget http://ftp.de.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.7_all.deb
 apt install ./ttf-mscorefonts-installer_3.7_all.deb -y
 wget https://grammalecte.net/grammalecte/oxt/Grammalecte-fr-v1.5.0.oxt
@@ -199,8 +200,8 @@ apt install libgl1-mesa-dri xserver-xorg-video-ati -y
 
 # install the headers and nvidia-drivers
 apt install pve-headers -y
-apt-get update 
-apt-get install nvidia-driver -y
+apt update 
+apt install nvidia-driver -y
 
 # Pilote Radeon
 apt install libgl1-mesa-dri xserver-xorg-video-radeon -y
@@ -215,7 +216,8 @@ sed -i "s/data.status !== 'Active'/false/g" /usr/share/javascript/proxmox-widget
 
 # mise à jour grub
 # Le fichier /etc/default/grub contient l'option GRUB_DISABLE_OS_PROBER="true" donc windows no detecter par grub !!!
-sed -i -e 's/GRUB_DISABLE_OS_PROBER="true"/GRUB_DISABLE_OS_PROBER="false"/' /etc/default/grub
+sed -i -e 's/GRUB_DISABLE_OS_PROBER=true/GRUB_DISABLE_OS_PROBER=false/' /etc/default/grub
+sleep 1
 update-grub
 
 # nettoyage du système
