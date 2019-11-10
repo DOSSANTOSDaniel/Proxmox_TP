@@ -14,12 +14,13 @@
 #  	Daniel DOS SANTOS < daniel.massy91@gmail.com >
 #----------------------------------------------------------------#
 
-apt update && apt dist-upgrade -y
+apt update && apt full-upgrade -y
 
 apt install gnupg -y
 
-usertos=$(w | awk '{print $1}' | awk 'NR==3')
 hostnamectl set-hostname pve1.proxmox.lan --static
+
+usertos=$(w | awk '{print $1}' | awk 'NR==3')
 ipnet=$(hostname -I | awk '{print $1}')
 ipwifi=$(hostname -I | awk '{print $2}')
 routetos=$(ip route | grep '^default via' | awk '{print $3}')
@@ -89,8 +90,7 @@ sleep 1
 
 apt update && apt dist-upgrade -y
 
-apt install proxmox-ve postfix open-iscsi -y
-
+apt install proxmox-ve -y
 rm /etc/apt/sources.list.d/pve-enterprise.list
 
 systemctl reboot
