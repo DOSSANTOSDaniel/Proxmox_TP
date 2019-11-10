@@ -6,7 +6,7 @@
 # Usage: ./InstallProxmoxDebian.sh
 #	Exécuter le script en root!
 #   Se connecter en root avec cette commande "su -" !
-#   Durée: 7 minutes
+#   Durée: 6 minutes
 #
 # Campatibilité:
 #	Il est préférable de ne pas être connecté en Wifi.
@@ -89,7 +89,7 @@ sleep 1
 
 apt update && apt dist-upgrade -y
 
-apt install proxmox-ve postfix open-iscsi ksm-control-daemon systemd-sysv -y
+apt install proxmox-ve postfix open-iscsi -y
 
 rm /etc/apt/sources.list.d/pve-enterprise.list
 
