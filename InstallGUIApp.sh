@@ -1,56 +1,31 @@
 #!/bin/bash
 
-# variables
+# variables réseau
 ipnet=$(hostname -I | awk '{print $1}')
 ipwifi=$(hostname -I | awk '{print $2}')
 usertos=$(w | awk '{print $1}' | awk 'NR==3')
 
-apt update && apt dist-upgrade -y
+apt update && apt full-upgrade -y
 
-#Make sure network-manager is not used, else pve-cluster will not start in some cases
+# supprimer network-manager car si non pve-cluster peut ne pas démarrer!!!
 apt remove network-manager --purge
 
-# Installation de Gnome3
-#apt install task-gnome-desktop -y
-
+# Installation d'une interface graphique
 # Install mate
-apt-get install xorg -y
-apt-get install lightdm -y
-apt-get install mate-desktop-environment -y
-
-# optimisation pour laptop
-tasksel install laptop
+apt install xorg -y
+apt install lightdm -y
+apt install mate-desktop-environment -y
 
 # démarrage automatique du server sur Gnome
-systemctl set-default graphical.target
+#systemctl set-default graphical.target
 
-# installation de simplenote
-wget https://github.com/Automattic/simplenote-electron/releases/download/v1.10.0/Simplenote-linux-1.10.0-amd64.deb
-apt install gconf2 -y
-dpkg -i Simplenote-linux-1.10.0-amd64.deb
-sleep 1
-rm Simplenote-linux-1.10.0-amd64.deb
-
-# installation de etcher
-echo "deb https://dl.bintray.com/resin-io/debian stable etcher" | tee /etc/apt/sources.list.d/etcher.list
-apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
-apt update
-apt install etcher-electron -y
-
-# installation et configuration de sudo
+### installation et configuration des applications vues en cours (Open source)
+###
 apt install sudo -y
 usermod -aG sudo $usertos
 
-# install vim
 apt install vim -y
 
-# install vlc
-apt install vlc -y
-
-# install filezilla
-apt install filezilla -y
-
-# installation et configuration du firewall
 apt install ufw -y
 ufw default deny incoming
 ufw default allow outgoing
@@ -61,33 +36,8 @@ ufw allow 8006
 ufw enable -y
 ufw status
 
-# installation de microapplications tierces
-apt install firmware-linux firmware-linux-nonfree libdrm-amdgpu1 xserver-xorg-video-amdgpu -y
-
-# appstore synaptic
-apt install synaptic apt-xapian-index -y
-
-# Pilote ATI
-apt install libgl1-mesa-dri xserver-xorg-video-ati -y
-
-# install the headers and nvidia-drivers
-apt install pve-headers -y
-apt-get update 
-apt-get install nvidia-driver -y
-
-# Pilote Radeon
-apt install libgl1-mesa-dri xserver-xorg-video-radeon -y
-
-# installateur .deb
-apt install gdebi -y
-
-#  Enlever la bannière de subscription
-cp /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js.save
-sed -i "s/data.status !== 'Active'/false/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
-
-# Installation et configuration de fail2ban
 apt install fail2ban -y
-sleep 2
+sleep 1
 echo "
 # ne pas éditer /etc/fail2ban/jail.conf
 [DEFAULT]
@@ -109,27 +59,103 @@ enabled = true
 sleep 1
 systemctl restart fail2ban
 
-# Installation de Molly-guard
 apt install molly-guard -y
-
-# Installation de Rkhunter
 apt install rkhunter -y
-
-# Installation de Mlocate
 apt install mlocate -y
-
-# Installation de vim
 apt install vim -y
-
-# Installation de net-tools
+apt install glances -y
 apt install net-tools -y
 
-# Installation de at
-apt install at -y
-sleep 2
+### Installation d'applications supplémentaires (pour mieux faire la transition de windows vers Linux)
+###
+# installation de simplenote
+wget https://github.com/Automattic/simplenote-electron/releases/download/v1.10.0/Simplenote-linux-1.10.0-amd64.deb
+apt install gconf2 -y
+dpkg -i Simplenote-linux-1.10.0-amd64.deb
+sleep 1
+rm Simplenote-linux-1.10.0-amd64.deb
 
-#Optional: Remove the Debian kernel
-#apt-get remove linux-image-amd64 linux-image-3.16.0-4-amd64 linux-base
+# installation de etcher
+apt install zenity -y
+echo "deb https://deb.etcher.io stable etcher" | tee /etc/apt/sources.list.d/balena-etcher.list
+sleep 1
+apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 379CE192D401AB61
+apt update
+apt install balena-etcher-electron -y
+
+# Installation d'AnyDesk
+wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | apt-key add -
+echo "deb http://deb.anydesk.com/ all main" > /etc/apt/sources.list.d/anydesk-stable.list
+sleep 1
+apt update
+apt install anydesk -y
+
+# Installation de Sublime text
+apt install apt-transport-https -y
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+apt-get update
+apt-get install sublime-text -y
+
+# Installation de Wireshark
+apt install wireshark -y
+usermod -a -G wireshark $usertos
+chgrp wireshark /usr/bin/dumpcap
+chmod 771 /usr/bin/dumpcap
+setcap cap_net_raw,cap_net_admin=eip /usr/bin/dumpcap
+
+# installation de google chrome
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo apt install ./google-chrome-stable_current_amd64.deb -y
+echo "
+### THIS FILE IS AUTOMATICALLY CONFIGURED ###
+# You may comment out this entry, but any other modifications may be lost.
+deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main
+" > /etc/apt/sources.list.d/google-chrome.list
+apt update && apt upgrade -y
+
+# Installation de LibreOffice
+apt install libreoffice -y
+apt-get install libreoffice-voikko
+apt-get install openclipart-libreoffice
+wget http://ftp.de.debian.org/debian/pool/contrib/m/msttcorefonts/ttf-mscorefonts-installer_3.7_all.deb
+apt install ./ttf-mscorefonts-installer_3.7_all.deb -y
+wget https://grammalecte.net/grammalecte/oxt/Grammalecte-fr-v1.5.0.oxt
+rm ttf-mscorefonts-installer_3.7_all.deb
+
+apt install vlc -y
+apt install filezilla -y
+apt install gdebi -y
+apt install gedit -y
+apt install iceweasel -y
+apt install gparted -y
+apt install screen -y
+apt install diodon -y
+apt install synaptic apt-xapian-index -y
+apt install ncdu -y
+
+### installation de dépendances ou autre
+apt install software-properties-common -y
+# installation de microapplications tierces
+apt install firmware-linux firmware-linux-nonfree libdrm-amdgpu1 xserver-xorg-video-amdgpu -y
+
+# Pilote ATI
+apt install libgl1-mesa-dri xserver-xorg-video-ati -y
+
+# install the headers and nvidia-drivers
+apt install pve-headers -y
+apt-get update 
+apt-get install nvidia-driver -y
+
+# Pilote Radeon
+apt install libgl1-mesa-dri xserver-xorg-video-radeon -y
+
+# optimisation pour laptop
+tasksel install laptop
+
+#  Enlever la bannière de subscription proxmox
+cp /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js.save
+sed -i "s/data.status !== 'Active'/false/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
 
 # mise à jour grub
 # Le fichier /etc/default/grub contient l'option GRUB_DISABLE_OS_PROBER="true" donc windows no detecter par grub !!!
@@ -137,9 +163,8 @@ sed -i -e 's/GRUB_DISABLE_OS_PROBER="true"/GRUB_DISABLE_OS_PROBER="false"/' /etc
 update-grub
 
 # nettoyage du système
-apt-get autoremove --purge
-apt-get autoclean --purge
-apt clean
+apt autoremove --purge
+apt autoclean
 
 # Purge des anciens Kernels
 nbkern=$(dpkg --list | grep linux-image | wc -l)
