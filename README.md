@@ -12,12 +12,12 @@
 * Purge de l'ancien Kernel
 
 # Attention
-* pas besoin de configurer le PATH ainsi:
+- pas besoin de configurer le PATH ainsi:
 - echo "PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin" >> /home/$usertos/.bashrc
 - source /home/daniel/.bashrc
 - echo "PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin" >> /root/.bashrc 
 - source /root/.bashrc
-
+Sur Debian 10 quand on tape "su -" nous avons accès au répertoire /sbin quand on appel une application.
 # Créer USB bootable de Debian 10
 wget https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.1.0-amd64-netinst.iso
 
