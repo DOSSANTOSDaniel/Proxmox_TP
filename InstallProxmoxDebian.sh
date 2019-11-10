@@ -1,13 +1,23 @@
 #!/bin/bash
 
+# Description:
+#	Permet l'installation de Proxmox sur Debian Buster (10)
+#----------------------------------------------------------------#
+# Usage: ./InstallProxmoxDebian.sh
+#	Exécuter le script en root!
+#
+# Campatibilité:
+#	Il est préférable de ne pas être connecté en Wifi
+# Auteur:
+#  	Daniel DOS SANTOS < daniel.massy91@gmail.com >
+#----------------------------------------------------------------#
+
 apt update && apt dist-upgrade -y
 
 apt install gnupg -y
 
 usertos=$(w | awk '{print $1}' | awk 'NR==3')
-
 hostnamectl set-hostname pve1.proxmox.lan --static
- 
 ipnet=$(hostname -I | awk '{print $1}')
 ipwifi=$(hostname -I | awk '{print $2}')
 routetos=$(ip route | grep '^default via' | awk '{print $3}')
@@ -71,7 +81,6 @@ else
 fi
 
 wget -qO - http://download.proxmox.com/debian/proxmox-ve-release-6.x.gpg | apt-key add -
-
 echo "deb http://download.proxmox.com/debian/pve buster pvetest" |  tee /etc/apt/sources.list.d/pve-install-repo.list
 echo "deb http://download.proxmox.com/debian/ceph-nautilus buster main" |  tee /etc/apt/sources.list.d/ceph.list
 sleep 1
