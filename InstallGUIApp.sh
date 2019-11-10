@@ -13,6 +13,9 @@ apt remove network-manager --purge
 # Installation d'une interface graphique
 apt install xorg -y
 apt install lightdm -y
+
+while [ : ]
+do
 echo -e "\n
 +---------------+
 |  Mate     [1] |
@@ -21,27 +24,41 @@ echo -e "\n
 |  XFCE4    [4] |
 +---------------+  
 "
-read -p "Choix de l'interface graphique : "
+read -p "Choix de l'interface graphique : " choix
 echo " "
 
-
-# Install Mate
-apt install task-mate-desktop -y
-apt install mate-desktop -y
-apt install mate-desktop-common -y
-apt install mate-desktop-environment task-french -y
-apt install mate-desktop-environment-extra -y
-apt install mate-desktop-environment-extras -y
-
-# Install XFCE4
-apt install task-xfce-desktop xfce4 task-french -y
-
-# Install Cinnamon
-apt install cinnamon-desktop-environment cinnamon-common -y
-apt install task-cinnamon-desktop task-french -y
-
-# Install LXQT
-apt install task-lxqt-desktop task-french lxqt -y
+case $choix in
+	1 )
+		# Install Mate
+    apt install task-mate-desktop -y
+    apt install mate-desktop -y
+    apt install mate-desktop-common -y
+    apt install mate-desktop-environment task-french -y
+    apt install mate-desktop-environment-extra -y
+    apt install mate-desktop-environment-extras -y
+    break
+		;;
+	2 )
+		# Install Cinnamon
+    apt install cinnamon-desktop-environment cinnamon-common -y
+    apt install task-cinnamon-desktop task-french -y
+    break
+		;;
+	3 )
+		# Install LXQT
+    apt install task-lxqt-desktop task-french lxqt -y
+    break
+		;;
+  4 )
+		# Install XFCE4
+    apt install task-xfce-desktop xfce4 task-french -y
+    break
+		;;
+	* )
+		echo "Erreur de saisie !"
+		;;
+esac
+done
 
 # démarrage automatique de l'interface graphique au boot de la machine
 systemctl set-default graphical.target
