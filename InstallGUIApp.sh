@@ -11,13 +11,40 @@ apt update && apt full-upgrade -y
 apt remove network-manager --purge
 
 # Installation d'une interface graphique
-# Install mate
 apt install xorg -y
 apt install lightdm -y
-apt install mate-desktop-environment -y
+echo -e "\n
++---------------+
+|  Mate     [1] |
+|  Cinnamon [2] |
+|  LXQT     [3] |
+|  XFCE4    [4] |
++---------------+  
+"
+read -p "Choix de l'interface graphique : "
+echo " "
 
-# démarrage automatique du server sur Gnome
-#systemctl set-default graphical.target
+
+# Install Mate
+apt install task-mate-desktop -y
+apt install mate-desktop -y
+apt install mate-desktop-common -y
+apt install mate-desktop-environment task-french -y
+apt install mate-desktop-environment-extra -y
+apt install mate-desktop-environment-extras -y
+
+# Install XFCE4
+apt install task-xfce-desktop xfce4 task-french -y
+
+# Install Cinnamon
+apt install cinnamon-desktop-environment cinnamon-common -y
+apt install task-cinnamon-desktop task-french -y
+
+# Install LXQT
+apt install task-lxqt-desktop task-french lxqt -y
+
+# démarrage automatique de l'interface graphique au boot de la machine
+systemctl set-default graphical.target
 
 ### installation et configuration des applications vues en cours (Open source)
 apt install sudo -y
