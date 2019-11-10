@@ -20,7 +20,6 @@ apt install mate-desktop-environment -y
 #systemctl set-default graphical.target
 
 ### installation et configuration des applications vues en cours (Open source)
-###
 apt install sudo -y
 usermod -aG sudo $usertos
 
@@ -67,7 +66,6 @@ apt install glances -y
 apt install net-tools -y
 
 ### Installation d'applications supplémentaires (pour mieux faire la transition de windows vers Linux)
-###
 # installation de simplenote
 wget https://github.com/Automattic/simplenote-electron/releases/download/v1.10.0/Simplenote-linux-1.10.0-amd64.deb
 apt install gconf2 -y
@@ -153,6 +151,7 @@ apt install libgl1-mesa-dri xserver-xorg-video-radeon -y
 # optimisation pour laptop
 tasksel install laptop
 
+### Autres configurations
 #  Enlever la bannière de subscription proxmox
 cp /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js.save
 sed -i "s/data.status !== 'Active'/false/g" /usr/share/javascript/proxmox-widget-toolkit/proxmoxlib.js
@@ -179,5 +178,4 @@ else
   done
 fi
 
-# redémarrage
 systemctl reboot
