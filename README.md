@@ -1,15 +1,12 @@
 # Proxmox_TP
-* Modification des sources
-* Mise à jour
+## Mise en place d'une station de travail avec Proxmox en 3 étapes:
+1 Création d'un clé USB amouçable avec Debian 10 (Buster).
+2 Installation de Debian sur un poste.
+3 Installation de Proxmox sur Debian.
+4 Installation d'un environnement graphique sur le poste Debian et installation de certaines applications.
+## Installations et configurations optionnelles
 * Enlever la bannière de subscription
-* Installation et configuration de fail2ban
-* Installation de Molly-guard
-* Installation de rkhunter
-* Installation de Mlocate
-* Installation de vim
-* Installation de net-tools
-* Installation de at
-* Purge de l'ancien Kernel
+
 
 # Attention
 - pas besoin de configurer le PATH ainsi:
