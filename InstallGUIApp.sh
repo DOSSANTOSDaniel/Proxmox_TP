@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Description:
-#	Permet l'installation d'une station de travail sur Proxmox
+#	Permet l'installation d'une station de travail avec un environnement graphique sur Proxmox
 #----------------------------------------------------------------#
 # Usage: ./InstallGUIApp.sh
 #	Exécuter le script en root!
@@ -10,7 +10,8 @@
 #
 # Campatibilité:
 #	Il est préférable de ne pas être connecté en Wifi.
-# Auteur:
+#
+# Auteurs:
 #  	Daniel DOS SANTOS < daniel.massy91@gmail.com >
 #----------------------------------------------------------------#
 
