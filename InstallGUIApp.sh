@@ -74,6 +74,8 @@ apt install mlocate -y
 apt install vim -y
 apt install glances -y
 apt install net-tools -y
+apt install ncdu -y
+apt install screen -y
 
 ### installation de dépendances ou autre
 apt install software-properties-common -y
