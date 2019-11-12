@@ -12,6 +12,12 @@
 #	Il est préférable de ne pas être connecté en Wifi.
 # Auteur:
 #  	Daniel DOS SANTOS < daniel.massy91@gmail.com >
+#
+# Sources:
+# https://pve.proxmox.com/wiki/Install_Proxmox_VE_on_Debian_Buster
+# https://computingforgeeks.com/how-to-install-proxmox-ve-on-debian/
+# https://pve.proxmox.com/wiki/Developer_Workstations_with_Proxmox_VE_and_X11
+# 
 #----------------------------------------------------------------#
 
 
@@ -83,13 +89,18 @@ done
 
 wget -qO - http://download.proxmox.com/debian/proxmox-ve-release-6.x.gpg | apt-key add -
 echo "deb http://download.proxmox.com/debian/pve buster pvetest" |  tee /etc/apt/sources.list.d/pve-install-repo.list
+
+# Il s’agit du dépôt Ceph pour Proxmox VE
 echo "deb http://download.proxmox.com/debian/ceph-nautilus buster main" |  tee /etc/apt/sources.list.d/ceph.list
 sleep 1
 
 apt update && apt full-upgrade -y
 
 apt install proxmox-ve -y
+
+# Si vous avez déjà un server postfix alors choisir: système satellite si non choisir: local uniquement
 apt install postfix -y
+
 apt install open-iscsi -y
 
 rm /etc/apt/sources.list.d/pve-enterprise.list
