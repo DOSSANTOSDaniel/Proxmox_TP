@@ -75,6 +75,7 @@ apt install vim -y
 apt install glances -y
 apt install net-tools -y
 apt install ncdu -y
+apt install ntp -y
 apt install screen -y
 
 ### installation de dépendances ou autre
