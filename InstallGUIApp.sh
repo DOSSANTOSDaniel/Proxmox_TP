@@ -6,7 +6,7 @@
 # Usage: ./InstallGUIApp.sh
 #	Exécuter le script en root!
 # 	Se connecter en root avec cette commande "su -" !
-#	Durée: 24 minutes
+#	Durée: ~15 minutes
 #
 # Campatibilité:
 #	Il est préférable de ne pas être connecté en Wifi.
