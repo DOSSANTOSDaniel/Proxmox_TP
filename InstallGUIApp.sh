@@ -23,14 +23,8 @@ interfacenet=$(ip link | grep ^2 | awk '{print $2}' | sed s'/://')
 
 apt update && apt full-upgrade -y
 
-# supprimer network-manager car si non pve-cluster peut ne pas démarrer!!!
-apt remove network-manager --purge
-
 # Installation d'une interface graphique
-apt install xorg -y
-apt install mesa-utils -y
-apt install mate-desktop-environment-extras -y
-apt install lightdm -y
+tasksel
 
 # démarrage automatique de l'interface graphique au boot de la machine
 systemctl set-default graphical.target
@@ -42,14 +36,15 @@ usermod -aG sudo $usertos
 apt install vim -y
 
 apt install ufw -y
+ufw status
+ufw enable
 ufw default deny incoming
 ufw default allow outgoing
-ufw allow ssh
-ufw allow 80
-ufw allow 443
-ufw allow 8006
-ufw enable -y
-ufw status
+ufw allow ssh/tcp
+ufw allow 80/tcp
+ufw allow 443/tcp
+ufw allow 8006/tcp
+ufw status verbose
 
 apt install fail2ban -y
 echo "
