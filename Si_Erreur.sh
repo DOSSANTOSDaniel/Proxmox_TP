@@ -8,7 +8,7 @@
 # 	Se connecter en root avec cette commande "su -" !
 #	Durée: ~ minutes
 #
-# Auteur:
+# Auteurs:
 #  	Daniel DOS SANTOS < daniel.massy91@gmail.com >
 #----------------------------------------------------------------#
 
