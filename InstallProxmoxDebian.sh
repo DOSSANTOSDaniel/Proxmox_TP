@@ -65,13 +65,13 @@ echo ""
 
 if [ $typecon == "c" ]
 then
-reseauip()
+reseauip
 echo $ipnet "pve1.proxmox.lan pve1" |  tee -a /etc/hosts
 hostname --ip-address
 breack
 elif [ $typecon == "w" ]
 then
-reseauip()
+reseauip
 echo "    
 # 2 interface wifi
 iface $interfacewifi inet static
