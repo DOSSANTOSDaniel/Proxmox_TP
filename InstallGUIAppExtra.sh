@@ -81,3 +81,5 @@ apt install putty -y
 # nettoyage du système
 apt autoremove --purge -y
 apt autoclean
+
+systemctl reboot
