@@ -8,3 +8,5 @@ update-grub
 # C'est un gestionnaire d'énergie pour les pc portable, il peut entrée en comflict avec le système.
 apt remove tlp --purge
 
+# supprimer network-manager car si non pve-cluster peut ne pas démarrer!!!
+apt remove network-manager --purge
