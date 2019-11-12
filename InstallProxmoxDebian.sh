@@ -61,6 +61,7 @@ if [ $typecon == "c" ]
 then
 reseauip()
 echo $ipnet "pve1.proxmox.lan pve1" |  tee -a /etc/hosts
+hostname --ip-address
 breack
 elif [ $typecon == "w" ]
 then
@@ -73,6 +74,7 @@ iface $interfacewifi inet static
     nameservers 8.8.8.8
 " > /etc/network/interfaces
 echo $ipwifi "pve1.proxmox.lan pve1" |  tee -a /etc/hosts
+hostname --ip-address
 breack
 else
     echo " Erreur syntax essayez de nouveau !"
@@ -84,9 +86,12 @@ echo "deb http://download.proxmox.com/debian/pve buster pvetest" |  tee /etc/apt
 echo "deb http://download.proxmox.com/debian/ceph-nautilus buster main" |  tee /etc/apt/sources.list.d/ceph.list
 sleep 1
 
-apt update && apt dist-upgrade -y
+apt update && apt full-upgrade -y
 
 apt install proxmox-ve -y
+apt install postfix -y
+apt install open-iscsi -y
+
 rm /etc/apt/sources.list.d/pve-enterprise.list
 
 systemctl reboot
