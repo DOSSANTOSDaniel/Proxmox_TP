@@ -27,7 +27,6 @@ apt install gnupg -y
 
 hostnamectl set-hostname pve1.proxmox.lan --static
 
-usertos=$(w | awk '{print $1}' | awk 'NR==3')
 ipnet=$(hostname -I | awk '{print $1}')
 ipwifi=$(hostname -I | awk '{print $2}')
 routetos=$(ip route | grep '^default via' | awk '{print $3}')
