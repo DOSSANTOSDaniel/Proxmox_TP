@@ -12,7 +12,11 @@
 #  	Daniel DOS SANTOS < daniel.massy91@gmail.com >
 #----------------------------------------------------------------#
 
-### Installation 
+### Installation
+
+usertos=$(w | awk '{print $1}' | awk 'NR==3')
+interfacewifi=$(ip link | grep ^3 | awk '{print $2}' | sed s'/://')
+interfacenet=$(ip link | grep ^2 | awk '{print $2}' | sed s'/://')
 
 # installation de simplenote
 wget https://github.com/Automattic/simplenote-electron/releases/download/v1.10.0/Simplenote-linux-1.10.0-amd64.deb
@@ -38,12 +42,12 @@ apt install anydesk -y
 
 # Installation de Wireshark
 apt install wireshark -y
-usermod -a -G wireshark $usertos
+usermod -a -G wireshark "$usertos"
 chgrp wireshark /usr/bin/dumpcap
 chmod 771 /usr/bin/dumpcap
 setcap cap_net_raw,cap_net_admin=eip /usr/bin/dumpcap
-ip link set $interfacenet promisc on
-ip link set $interfacewifi promisc on
+ip link set "$interfacenet" promisc on
+ip link set "$interfacewifi" promisc on
 
 # Installation de Visual Studio Code
 wget http://packages.microsoft.com/repos/vscode/pool/main/c/code/code_1.40.1-1573664190_amd64.deb
