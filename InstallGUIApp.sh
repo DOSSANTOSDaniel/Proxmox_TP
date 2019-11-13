@@ -19,8 +19,6 @@
 ipnet=$(hostname -I | awk '{print $1}')
 ipwifi=$(hostname -I | awk '{print $2}')
 usertos=$(w | awk '{print $1}' | awk 'NR==3')
-interfacewifi=$(ip link | grep ^3 | awk '{print $2}' | sed s'/://')
-interfacenet=$(ip link | grep ^2 | awk '{print $2}' | sed s'/://')
 
 apt update && apt full-upgrade -y
 
@@ -32,7 +30,7 @@ systemctl set-default graphical.target
 
 ### installation et configuration des applications vues en cours (Open source)
 apt install sudo -y
-usermod -aG sudo $usertos
+usermod -aG sudo "$usertos"
 
 apt install vim -y
 
@@ -98,15 +96,15 @@ apt autoremove --purge -y
 apt autoclean
 
 # Purge des anciens Kernels
-nbkern=$(dpkg --list | grep linux-image | wc -l)
+nbkern=$(dpkg --list | grep -c linux-image)
 if [[ -z "$nbkern" ]]
 then
   echo -e "\n Pas de kernels a supprimer ! \n"
 else
-  for (( i=1; i<=$nbkern; i++ ))
+  for (( i=1; i<=nbkern; i++ ))
   do
     onekern=$(dpkg --list | grep linux-image | awk '{print $2}' | awk "NR==$i")
-    apt remove $onekern --purge -y
+    apt remove "$onekern" --purge -y
   done
 fi
 
