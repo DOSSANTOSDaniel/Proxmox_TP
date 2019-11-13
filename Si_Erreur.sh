@@ -6,7 +6,6 @@
 # Usage: ./Si_Erreur.sh
 #	Exécuter le script en root!
 # 	Se connecter en root avec cette commande "su -" !
-#	Durée: ~ minutes
 #
 # Auteurs:
 #  	Daniel DOS SANTOS < daniel.massy91@gmail.com >
