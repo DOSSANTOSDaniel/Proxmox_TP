@@ -53,7 +53,7 @@ iface $interfacenet inet static
     gateway $routetos
     nameserver 8.8.8.8
 " > /etc/network/interfaces
-echo $ipnet "pve1.proxmox.lan pve1" |  tee -a /etc/hosts
+echo "$ipnet pve1.proxmox.lan pve1" |  tee -a /etc/hosts
 }
 
 while [ : ]
@@ -62,13 +62,13 @@ echo ""
 read -p "Quelle type de connexion ? Wifi[w] ou Câble[c] : " typecon
 echo ""
 
-if [ $typecon == "c" ]
+if [ "$typecon" == "c" ]
 then
 reseauip
-echo $ipnet "pve1.proxmox.lan pve1" |  tee -a /etc/hosts
+echo "$ipnet pve1.proxmox.lan pve1" |  tee -a /etc/hosts
 hostname --ip-address
 breack
-elif [ $typecon == "w" ]
+elif [ "$typecon" == "w" ]
 then
 reseauip
 echo "    
@@ -78,7 +78,7 @@ iface $interfacewifi inet static
     gateway $routetos
     nameservers 8.8.8.8
 " > /etc/network/interfaces
-echo $ipwifi "pve1.proxmox.lan pve1" |  tee -a /etc/hosts
+echo "$ipwifi pve1.proxmox.lan pve1" |  tee -a /etc/hosts
 hostname --ip-address
 breack
 else
