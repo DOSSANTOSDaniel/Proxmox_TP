@@ -54,6 +54,7 @@ wget http://packages.microsoft.com/repos/vscode/pool/main/c/code/code_1.40.1-157
 apt install ./code_1.40.1-1573664190_amd64.deb -y
 sleep 1
 rm code_1.40.1-1573664190_amd64.deb
+code --install-extension timonwong.shellcheck
 
 # installation de google chrome
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
