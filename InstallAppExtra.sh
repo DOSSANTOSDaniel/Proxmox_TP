@@ -88,6 +88,7 @@ apt install keepassx -y
 apt install rhythmbox -y
 apt install putty -y
 apt install git -y
+apt install nwipe -y
 
 # nettoyage du système
 apt autoremove --purge -y
