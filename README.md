@@ -200,10 +200,10 @@ Programmes installés et configurations
 * nettoyage du système
 * Visual Studio Code
 
-* Attention
-- pas besoin de configurer le PATH ainsi:
-- echo "PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin" >> /home/$usertos/.bashrc
-- source /home/daniel/.bashrc
-- echo "PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin" >> /root/.bashrc 
-- source /root/.bashrc
+Attention
+pas besoin de configurer le PATH ainsi:
+echo "PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin" >> /home/$usertos/.bashrc
+source /home/daniel/.bashrc
+echo "PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin" >> /root/.bashrc 
+source /root/.bashrc
 Sur Debian 10 quand on tape "su -" nous avons accès au répertoire /sbin quand on appel une application.
