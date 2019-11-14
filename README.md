@@ -10,7 +10,7 @@
 
 ### Autres scripts : 
 
-[InstallGUIAppExtra.sh](https://github.com/DOSSANTOSDaniel/Proxmox_TP/blob/master/InstallGUIAppExtra.sh) : Pour l’installation d’applications supplementaires.
+[InstallAppExtra.sh](https://github.com/DOSSANTOSDaniel/Proxmox_TP/blob/master/InstallAppExtra.sh) : Pour l’installation d’applications supplementaires.
 
 [Si_Erreur.sh](https://github.com/DOSSANTOSDaniel/Proxmox_TP/blob/master/Si_Erreur.sh) : Si jamais l’interface graphique ne se lance pas chez vous.
 
@@ -107,7 +107,7 @@ cd Proxmox_TP
 
 1. ./InstallProxmoxDebian.sh (installation de Proxmox) 
 2. ./InstallGUIApp.sh (installation de l’interface graphique) 
-3. ./InstallGUIAppExtra.sh (autres applications) 
+3. ./InstallAppExtra.sh (autres applications) 
 
 Lancer d'abord le script 1 puis à la fin du script le système redémarrera, par la suite lancer le script 2 le système redémarrera aussi à la fin, et pour finir si vous voulez lancer le script 3.
 
@@ -176,7 +176,7 @@ Installation et configuration de l’interface graphique à l’aide de tasksel
 
 ### Installations et configurations optionnelles
 
-Script : InstallGUIAppExtra.sh 
+Script : InstallAppExtra.sh 
 
 Programmes installés et configurations
 
