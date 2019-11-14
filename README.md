@@ -119,15 +119,15 @@ Script: InstallProxmoxDebian.sh
 
 Programmes installés et configurations:
 
-Proxmox
-Postfix
-open-iscsi
-Configuration DNS
-Proxmox ve
-Postfix
-open-iscsi
-Configuration DNS
-Configuration Interface réseau
+* Proxmox
+* Postfix 
+* open-isc 
+* Configuration DNS
+* Proxmox ve
+* Postfix
+* open-iscsi
+* Configuration DNS
+* Configuration Interface réseau
 
 Si une fois l’ordinateur redémarré il n’a plus internet:
 
@@ -155,24 +155,24 @@ A vous de choisir. (perso j’ai choisi MATE, c’est un savant mélange entre s
 Programmes installés et configurations:
 
 Installation et configuration de l’interface graphique à l’aide de tasksel
-Sudo
-Vim
-UFW
-Création de règles de firewall UFW
-Installation et configuration de Fail2ban
-molly-guard
-rkhunter
-mlocate
-vim
-glances
-net-tools
-ncdu
-ntp
-screen
-software-properties-common
-Enleve la bannière de souscription proxmox
-Configuration grub
-Nettoyage du système
+* Sudo
+* Vim
+* UFW
+* Création de règles de firewall UFW
+* Installation et configuration de Fail2ban
+* molly-guard
+* rkhunter
+* mlocate
+* vim
+* glances
+* net-tools
+* ncdu
+* ntp
+* screen
+* software-properties-common
+* Enleve la bannière de souscription proxmox
+* Configuration grub
+* Nettoyage du système
 
 ### Installations et configurations optionnelles
 
@@ -180,25 +180,25 @@ Script : InstallGUIAppExtra.sh
 
 Programmes installés et configurations
 
-simplenote
-etcher
-AnyDesk
-wireshark
-google chrome
-libreoffice
-vlc
-filezilla
-gdebi
-gedit
-gparted
-diodon
-nextcloud-desktop
-zenmap
-keepassx
-rhythmbox
-putty
-nettoyage du système
-Visual Studio Code
+* simplenote
+* etcher
+* AnyDesk
+* wireshark
+* google chrome
+* libreoffice
+* vlc
+* filezilla
+* gdebi
+* gedit
+* gparted
+* diodon
+* nextcloud-desktop
+* zenmap
+* keepassx
+* rhythmbox
+* putty
+* nettoyage du système
+* Visual Studio Code
 
 * Attention
 - pas besoin de configurer le PATH ainsi:
