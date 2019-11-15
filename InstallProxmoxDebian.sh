@@ -67,7 +67,7 @@ then
 reseauip
 echo "$ipnet pve1.proxmox.lan pve1" |  tee -a /etc/hosts
 hostname --ip-address
-breack
+break
 elif [ "$typecon" == "w" ]
 then
 reseauip
@@ -80,7 +80,7 @@ iface $interfacewifi inet static
 " > /etc/network/interfaces
 echo "$ipwifi pve1.proxmox.lan pve1" |  tee -a /etc/hosts
 hostname --ip-address
-breack
+break
 else
     echo " Erreur syntax essayez de nouveau !"
 fi
