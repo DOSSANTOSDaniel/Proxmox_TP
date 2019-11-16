@@ -10,8 +10,6 @@
 
 ### Autres scripts : 
 
-[InstallAppExtra.sh](https://github.com/DOSSANTOSDaniel/Proxmox_TP/blob/master/InstallAppExtra.sh) : Pour l’installation d’applications supplementaires.
-
 [Si_Erreur.sh](https://github.com/DOSSANTOSDaniel/Proxmox_TP/blob/master/Si_Erreur.sh) : Si jamais l’interface graphique ne se lance pas chez vous.
 
   
@@ -107,10 +105,8 @@ cd Proxmox_TP
 
 1. ./InstallProxmoxDebian.sh (installation de Proxmox) 
 2. ./InstallGUIApp.sh (installation de l’interface graphique) 
-3. ./InstallAppExtra.sh (autres applications) 
 
-Lancer d'abord le script 1 puis à la fin du script le système redémarrera, par la suite lancer le script 2 le système redémarrera aussi à la fin, et pour finir si vous voulez lancer le script 3.
-
+Lancer d'abord le script 1 puis à la fin du script le système redémarrera, par la suite lancer le script 2 le système redémarrera aussi.
   
 
 #### Installation et configuration de Proxmox sur Debian:
@@ -118,15 +114,11 @@ Lancer d'abord le script 1 puis à la fin du script le système redémarrera, pa
 Script: InstallProxmoxDebian.sh
 
 Programmes installés et configurations:
-
-* Proxmox
-* Postfix 
-* open-isc 
+  
 * Configuration DNS
 * Proxmox ve
 * Postfix
 * open-iscsi
-* Configuration DNS
 * Configuration Interface réseau
 
 Si une fois l’ordinateur redémarré il n’a plus internet:
@@ -150,7 +142,7 @@ Pour l’environnement graphique vous avez le choix entre plusieurs interfaces:
 7. lxde-desktop    LXDE 
 8. lxqt-desktop    LXQt 
 
-A vous de choisir. (perso j’ai choisi MATE, c’est un savant mélange entre stabilité et légèreté) 
+A vous de choisir.
 
 Programmes installés et configurations:
 
@@ -173,37 +165,3 @@ Installation et configuration de l’interface graphique à l’aide de tasksel
 * Enleve la bannière de souscription proxmox
 * Configuration grub
 * Nettoyage du système
-
-### Installations et configurations optionnelles
-
-Script : InstallAppExtra.sh 
-
-Programmes installés et configurations
-
-* simplenote
-* etcher
-* AnyDesk
-* wireshark
-* google chrome
-* libreoffice
-* vlc
-* filezilla
-* gdebi
-* gedit
-* gparted
-* diodon
-* nextcloud-desktop
-* zenmap
-* keepassx
-* rhythmbox
-* putty
-* nettoyage du système
-* Visual Studio Code
-
-Attention  
-pas besoin de configurer le PATH ainsi:  
-echo "PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin" &gt;&gt; /home/$usertos/.bashrc  
-source /home/daniel/.bashrc  
-echo "PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin" &gt;&gt; /root/.bashrc   
-source /root/.bashrc  
-Sur Debian 10 quand on tape "su -" nous avons accès au répertoire /sbin quand on appel une application.
