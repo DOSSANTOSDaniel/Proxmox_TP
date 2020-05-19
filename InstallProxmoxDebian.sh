@@ -33,10 +33,7 @@ routetos=$(ip route | grep '^default via' | awk '{print $3}')
 interfacewifi=$(ip link | grep ^3 | awk '{print $2}' | sed s'/://')
 interfacenet=$(ip link | grep ^2 | awk '{print $2}' | sed s'/://')
 
-# Fonctions
-reseauip()
-{
-      echo "
+echo "
 # This file describes the network interfaces available on your system
 # and how to activate them. For more information, see interfaces(5).
 
@@ -53,38 +50,10 @@ iface $interfacenet inet static
     gateway $routetos
     nameserver 8.8.8.8
 " > /etc/network/interfaces
-echo "$ipnet pve1.proxmox.lan pve1" |  tee -a /etc/hosts
-}
 
-while [ : ]
-do
-echo ""
-read -p "Quelle type de connexion ? Wifi[w] ou Câble[c] : " typecon
-echo ""
-
-if [ "$typecon" == "c" ]
-then
-reseauip
 echo "$ipnet pve1.proxmox.lan pve1" |  tee -a /etc/hosts
+
 hostname --ip-address
-break
-elif [ "$typecon" == "w" ]
-then
-reseauip
-echo "    
-# 2 interface wifi
-iface $interfacewifi inet static
-    address $ipwifi/24
-    gateway $routetos
-    nameservers 8.8.8.8
-" > /etc/network/interfaces
-echo "$ipwifi pve1.proxmox.lan pve1" |  tee -a /etc/hosts
-hostname --ip-address
-break
-else
-    echo " Erreur syntax essayez de nouveau !"
-fi
-done
 
 wget -qO - http://download.proxmox.com/debian/proxmox-ve-release-6.x.gpg | apt-key add -
 echo "deb http://download.proxmox.com/debian/pve buster pvetest" |  tee /etc/apt/sources.list.d/pve-install-repo.list
