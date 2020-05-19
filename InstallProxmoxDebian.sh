@@ -8,8 +8,6 @@
 #   Se connecter en root avec cette commande "su -" !
 #   Durée: ~ 6 minutes
 #
-# Campatibilité:
-#	Il est préférable de ne pas être connecté en Wifi.
 # Auteur:
 #  	Daniel DOS SANTOS < daniel.massy91@gmail.com >
 #
