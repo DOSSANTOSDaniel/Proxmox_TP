@@ -46,15 +46,19 @@ Ouvrir un terminal.
 
 Téléchargement de l’image système de Debian Buster:
 
+```
 wget [https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.1.0-amd64-netinst.iso](https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-10.1.0-amd64-netinst.iso)
+```
 
 Brancher une clé USB sur votre ordinateur et lancer la commande lsblk pour identifier la clé USB, attention cette clé sera complètement formatée.
 
-Démonter la clé USB avec la commande : umount /dev/sdx
+Démonter la clé USB avec la commande
+
+`umount /dev/sdx`
 
 Commencer la copie sur la clé USB avec la commande dd:
 
-dd bs=1M if=debian-10*.iso of=/dev/sdX status=progress oflag=sync
+`dd bs=1M if=debian-10*.iso of=/dev/sdX status=progress oflag=sync`
 
 #### Exemple d’installation de Debian sur un ordinateur:
 
@@ -89,7 +93,7 @@ dd bs=1M if=debian-10*.iso of=/dev/sdX status=progress oflag=sync
 
 #### Fin de l’Installation et configuration de grub
 
-1. Installer le programme de démarrage GRUB sur le secteur d’amorçage ?  &lt;oui&gt; 
+1. Installer le programme de démarrage GRUB sur le secteur d’amorçage ?  oui. 
 2. Pour installer le programme de démarrage GRUB sur les disques durs : répondre  oui. 
 3. Sélectionner la ligne  ”/dev/sdX” correspondant à votre disque.  
 4. Valider la fin de l’installation avec la touche Entrée. 
@@ -97,6 +101,7 @@ dd bs=1M if=debian-10*.iso of=/dev/sdX status=progress oflag=sync
 
 #### Pour le lancement des scripts
 
+```
 apt install git
 
 git clone https://github.com/DOSSANTOSDaniel/Proxmox_TP.git
@@ -105,6 +110,8 @@ cd Proxmox_TP
 
 1. ./InstallProxmoxDebian.sh (installation de Proxmox) 
 2. ./InstallGUIApp.sh (installation de l’interface graphique) 
+
+```
 
 Lancer d'abord le script 1 puis à la fin du script le système redémarrera, par la suite lancer le script 2 le système redémarrera aussi.
   
@@ -123,7 +130,9 @@ Programmes installés et configurations:
 
 Si une fois l’ordinateur redémarré il n’a plus internet:
 
-Tester la connexion avec la commande : ping 8.8.8.8
+Tester la connexion avec la commande
+
+`ping 8.8.8.8`
 
 Demander une adresse IP au serveur DHCP avec la commande : dhclient
 
@@ -162,6 +171,6 @@ Installation et configuration de l’interface graphique à l’aide de tasksel
 * ntp
 * screen
 * software-properties-common
-* Enleve la bannière de souscription proxmox
+* Enlever la bannière de souscription proxmox
 * Configuration grub
 * Nettoyage du système
