@@ -26,7 +26,6 @@ hostnamectl set-hostname pve.proxmox.lan --static
 
 interfacenet=$(ip link | grep ^2 | awk '{print $2}' | sed s'/://')
 ipnet=$(hostname -I | awk '{print $1}')
-maskip=$(cat /sys/class/net/${interfacenet}/address)
 routetos=$(ip route | grep '^default via' | awk '{print $3}')
 
 echo "
@@ -47,7 +46,6 @@ iface $interfacenet inet manual
 auto vmbr0
 iface vmbr0 inet static
         address  $ipnet/24
-        netmask  $maskip
         gateway  $routetos
         bridge_ports enp2s0
         bridge_stp off
@@ -83,7 +81,7 @@ apt install open-iscsi -y
 rm /etc/apt/sources.list.d/pve-enterprise.list
 
 # Seulement si on est pas en dual boot !
-apt remove os-prober
+apt remove os-prober -y
 
 update-grub
 

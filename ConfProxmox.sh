@@ -24,7 +24,7 @@ usermod -aG sudo "$usertos"
 
 apt install ufw -y
 ufw status
-ufw enable
+ufw --force enable
 ufw default deny incoming
 ufw default allow outgoing
 ufw allow ssh/tcp
