@@ -18,18 +18,16 @@
 # 
 #----------------------------------------------------------------#
 
-
 apt update && apt full-upgrade -y
 
-apt install gnupg -y
+apt install gnupg -qqy
 
-hostnamectl set-hostname pve1.proxmox.lan --static
+hostnamectl set-hostname pve.proxmox.lan --static
 
-ipnet=$(hostname -I | awk '{print $1}')
-ipwifi=$(hostname -I | awk '{print $2}')
-routetos=$(ip route | grep '^default via' | awk '{print $3}')
-interfacewifi=$(ip link | grep ^3 | awk '{print $2}' | sed s'/://')
 interfacenet=$(ip link | grep ^2 | awk '{print $2}' | sed s'/://')
+ipnet=$(hostname -I | awk '{print $1}')
+maskip=$(cat /sys/class/net/${interfacenet}/address)
+routetos=$(ip route | grep '^default via' | awk '{print $3}')
 
 echo "
 # This file describes the network interfaces available on your system
@@ -38,23 +36,31 @@ echo "
 source /etc/network/interfaces.d/*
 
 # The loopback network interface
-auto lo $interfacenet
+auto lo
 iface lo inet loopback
 
 # The primary network interface
+auto $interfacenet
 allow-hotplug $interfacenet
-iface $interfacenet inet static
-    address $ipnet/24
-    gateway $routetos
-    nameserver 8.8.8.8
+iface $interfacenet inet manual
+
+auto vmbr0
+iface vmbr0 inet static
+        address  $ipnet/24
+        netmask  $maskip
+        gateway  $routetos
+        bridge_ports enp2s0
+        bridge_stp off
+        bridge_fd 0
+
 " > /etc/network/interfaces
 
-echo "$ipnet pve1.proxmox.lan pve1" |  tee -a /etc/hosts
+echo "$ipnet pve.proxmox.lan pve" |  tee -a /etc/hosts
 
 hostname --ip-address
 
 wget -qO - http://download.proxmox.com/debian/proxmox-ve-release-6.x.gpg | apt-key add -
-echo "deb http://download.proxmox.com/debian/pve buster pvetest" |  tee /etc/apt/sources.list.d/pve-install-repo.list
+echo "deb [arch=amd64] http://download.proxmox.com/debian/pve buster pvetest" |  tee /etc/apt/sources.list.d/pve-install-repo.list
 
 # Il s’agit du dépôt Ceph pour Proxmox VE
 echo "deb http://download.proxmox.com/debian/ceph-nautilus buster main" |  tee /etc/apt/sources.list.d/ceph.list
@@ -62,13 +68,23 @@ sleep 1
 
 apt update && apt full-upgrade -y
 
+# Effacer les packets non utilisés
+apt purge -qqy firmware-bnx2x
+apt purge -qqy firmware-realtek 
+apt purge -qqy firmware-linux
+apt purge -qqy firmware-linux-free 
+apt purge -qqy firmware-linux-nonfree
+
 apt install proxmox-ve -y
 
 # Si vous avez déjà un server postfix alors choisir: système satellite si non choisir: local uniquement
 apt install postfix -y
-
 apt install open-iscsi -y
-
 rm /etc/apt/sources.list.d/pve-enterprise.list
+
+# Seulement si on est pas en dual boot !
+apt remove os-prober
+
+update-grub
 
 systemctl reboot
