@@ -22,17 +22,6 @@ apt update && apt full-upgrade -y
 apt install sudo -y
 usermod -aG sudo "$usertos"
 
-apt install ufw -y
-ufw status
-ufw --force enable
-ufw default deny incoming
-ufw default allow outgoing
-ufw allow ssh/tcp
-ufw allow 80/tcp
-ufw allow 443/tcp
-ufw allow 8006/tcp
-ufw status verbose
-
 apt install fail2ban -y
 echo "
 # ne pas éditer /etc/fail2ban/jail.conf
