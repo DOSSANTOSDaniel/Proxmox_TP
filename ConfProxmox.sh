@@ -47,14 +47,12 @@ systemctl restart fail2ban
 ### installation de dépendances ou autre
 apt install molly-guard -qqy
 apt install rkhunter -qqy
-apt install mlocate -qqy
 apt install vim -qqy
 apt install glances -qqy
 apt install net-tools -qqy
 apt install ncdu -qqy
 apt install ntp -qqy
 apt install screen -qqy
-apt install git -qqy
 apt install nmap -qqy
 apt install htop -qqy
 apt install strace -qqy
