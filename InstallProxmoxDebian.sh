@@ -66,7 +66,7 @@ sleep 1
 
 apt update && apt full-upgrade -y
 
-# Effacer les packets non utilisés
+# Effacer les paquets non utilisés
 apt purge -qqy firmware-bnx2x
 apt purge -qqy firmware-realtek 
 apt purge -qqy firmware-linux
@@ -75,7 +75,7 @@ apt purge -qqy firmware-linux-nonfree
 
 apt install proxmox-ve -y
 
-# Si vous avez déjà un server postfix alors choisir: système satellite si non choisir: local uniquement
+# Si vous avez déjà un serveur Postfix alors choisir: système satellite si non choisir: local uniquement
 apt install postfix -y
 apt install open-iscsi -y
 rm /etc/apt/sources.list.d/pve-enterprise.list

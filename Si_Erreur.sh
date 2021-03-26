@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Description:
-#	Tente de résoudre les problèmes les plus frequents
+#	Tente de résoudre les problèmes les plus fréquents
 #----------------------------------------------------------------#
 # Usage: ./Si_Erreur.sh
 #	Exécuter le script en root!
@@ -16,7 +16,7 @@ sed -i -e 's/GRUB_CMDLINE_LINUX_DEFAULT="quiet spalsh"/GRUB_CMDLINE_LINUX_DEFAUL
 sleep 1
 update-grub
 
-# C'est un gestionnaire d'énergie pour les pc portable, il peut entrée en comflict avec le système.
+# C'est un gestionnaire d'énergie pour les pc portable, il peut entrée en conflit avec le système.
 apt remove tlp --purge
 
 # supprimer network-manager car si non pve-cluster peut ne pas démarrer!!!
